@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffff;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(4, 94, 9);
+}
+
+header .logo {
+    position: relative;
+    max-width: 40px;
+}
+
+header ul {
+    position: relative;
+    display: flex;
+}
+
+header ul li {
+    list-style: none;
+}
+
+header ul li a {
+    display: inline-block;
+    font-weight: 400;
+    margin-left: 40px;
+    text-decoration: none;
+    color: beige;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header ul li a:hover{
+    color: blue;
+}
+
+.content{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content .textBox{
+    position: relative;
+    max-width: 600px;
+}
+
+.content .textBox h2{
+    color: #333;
+    font-size: 4em;
+    line-height: 1.4em;
+    font-weight: 500 ;
+}
+
+.content .textBox h2 span{
+    font-size: 5rem;
+    color: rgb(4, 94, 9);
+    font-weight: 900;
+
+}
+
+.content{
+    padding: 12px;
+}
+
+.content .textBox a{
+    position: absolute;
+    color: white;
+    font-weight: 200;
+    text-decoration: none;
+    background-color: rgb(4, 94, 9);
+    padding: 10px;
+    top: 353px;
+    border-radius: 20px;
+    margin-left: 200px;
+}
+
+.content .textBox a:hover{
+    color: royalblue;
+}
+
+.imgBox{
+    display: flex;
+    width: 600px;
+    justify-content: flex-end;
+    margin-top: 50px;
+}
+
+.imgBox img{
+    max-width: 340px;
+    margin-top: 20px;
+}
+
+.thumb{
+    position: absolute;
+    left:46%;
+    bottom: 0px;
+    display: flex;
+    transform: translateX(-50%);
+    transition: 0.5s;
+}
+
+.thumb li{
+    list-style: none;
+    display: inline-block;
+    padding: 0 10px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.thumb li:hover{
+    transform: translateY(-15px);
+}
+
+.thumb li img{
+    max-width: 60px;
+}
+
+.social{
+    position: absolute;
+    right: 10px;
+    bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-50%);
+    justify-content: center;
+    align-items: center;
+}
+
+.social li {
+    list-style: none;
+    padding: 10px 20px;
+}
+
+.social li a{
+    transform: scale(0.6);
+    filter: invert(1);
+}
+
+.circle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #017143;
+    clip-path: circle(600px at right 1000px);
+}
