@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
     exit();
 } else {
     
-    echo "<script>alert('Incorrect login credentials'); window.location.href = 'login.html';</script>";
+    echo "<script>alert('Incorrect login credentials'); window.location.href = 'register.html';</script>";
 }
 
 $stmt->close();
