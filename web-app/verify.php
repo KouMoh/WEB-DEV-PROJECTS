@@ -22,8 +22,13 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
+    session_start();
+    $row = $result->fetch_assoc();
     
-    header("Location:http://localhost/project/pfp.html");
+    $_SESSION['id'] = $row['id'];
+    $_SESSION['name'] = $row['name'];
+    $_SESSION['email'] = $row['email'];
+    header("Location:http://localhost/project/pfp.php");
     exit();
 } else {
     
