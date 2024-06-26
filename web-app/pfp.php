@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['id'])) {
+    echo "<script>alert('Incorrect login credentials')";
+    header("Location: register.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,12 +38,13 @@
             font-style: normal;
             overflow-x: hidden;
             background: #8d9fdb;
+            overflow: hidden;
         }
 
         .card {
             position: absolute;
-            left: 120px;
-            top: 20px;
+            left: 300px;
+            top: 60px;
         }
 
         .card img {
@@ -45,7 +56,7 @@
 
         #nav {
             position: absolute;
-            left: 500px;
+            left: 800px;
         }
 
         .nav-link.active {
@@ -62,11 +73,124 @@
         #socials i:hover{
             color: red;
         }
+
+        nav {
+            width: 100%;
+        }
+
+        nav {
+            padding: 30px;
+        }
+
+        nav form {
+            position: absolute;
+            right: 12px;
+        }
+
+        nav a {
+            text-decoration: none;
+        }
+
+        
+
+        .dropdown-item img {
+            width: 50px;
+            padding: 2px;
+            border-radius: 20%;
+        }
+
+        .dropdown-item img {
+            align-content: center;
+        }
+        .sidebar {
+            height: 100%;
+            width: 130px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #405189;
+            padding-top: 16px;
+
+        }
+
+        .sidebar i {
+            color: #f1f1f1;
+            padding: 2px 50px;
+            font-size: 40px;
+        }
+
+        .sidebar ul li {
+            list-style: none;
+
+        }
+
+        .sidebar a {
+            padding: 20px 0;
+            text-decoration: none;
+            font-size: 20px;
+            color: #fff;
+            display: block;
+            transition: 0.3s ease-in;
+        }
+
+        .sidebar a:hover {
+            color: aquamarine;
+        }
+
+        .sidebar i{
+            position: relative;
+            right: 10px;
+            transition: 0.3s ease-in;
+        }
+        .sidebar i:hover{
+            cursor: pointer;
+            color: aqua;
+        }
+
+        .dropdown-show{
+            position: relative;
+            left: 200px;
+        }
     </style>
 
 </head>
 
 <body>
+
+
+    <div class="sidebar">
+        <i class="fa-solid fa-gamepad"></i>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#clients">Clients</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </div>
+
+    
+
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="dropdown-show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown link
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#" style ="color:red" onclick ="logout()">Logout</a>
+            </div>
+        </div>
+        <form action="backend.php">
+            <input type="search" name="Search" placeholder="Search here" id="search">
+            <label for="search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </label>
+        </form>
+    </nav>
 
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="pfp.jpg" alt="Card image cap">
@@ -76,9 +200,9 @@
                 content.</p>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+            <li class="list-group-item"><?php echo "ID: ".$_SESSION['id'] ?></li>
+            <li class="list-group-item"><?php echo $_SESSION['name'] ?></li>
+            <li class="list-group-item"><?php echo $_SESSION['email'] ?></li>
         </ul>
         <div class="card-body" id="socials">
             <a href="#" class="card-link"><i class="fa-brands fa-facebook"></i></a>
@@ -107,6 +231,8 @@
         </div>
     </div>
 
+
+
     <script>
         function toggleContent(content) {
             
@@ -128,6 +254,33 @@
             }
         }
     </script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js"
+integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js"
+integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+crossorigin="anonymous"> </script>
+
+<script>
+
+function logout(){
+    <?php session_destroy(); ?>
+        alert('Logged out!'); 
+        window.location.href = 'register.html';
+}
+
+window.onload = () => {
+    <?php if (!isset($_SESSION['id'])): ?>
+        window.location.href = 'register.html';
+    <?php endif; ?>
+    };
+
+
+</script>
 
 </body>
 
