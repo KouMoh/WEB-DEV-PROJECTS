@@ -42,16 +42,18 @@ if (!isset($_SESSION['id'])) {
         }
 
         .card {
+            text-align: center;
             position: absolute;
             left: 300px;
             top: 60px;
         }
 
         .card img {
-            padding-top: 12px;
-            width: 100px;
-            align-self: center;
-            border-radius: 20%;
+        padding: 12px;
+        height: 145px;
+        width: 122px;
+        align-self: center;
+        border-radius: 20%;
         }
 
         #nav {
@@ -194,13 +196,7 @@ if (!isset($_SESSION['id'])) {
 
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="pfp.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-        </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><?php echo "ID: ".$_SESSION['id'] ?></li>
             <li class="list-group-item"><?php echo $_SESSION['name'] ?></li>
             <li class="list-group-item"><?php echo $_SESSION['email'] ?></li>
         </ul>
@@ -219,41 +215,61 @@ if (!isset($_SESSION['id'])) {
                     <a class="nav-link active" href="#" onclick="toggleContent('active')">Active</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="toggleContent('link')">Link</a>
+                    <a class="nav-link" href="#" onclick="toggleContent('link')">Edit Content</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="toggleContent('yo')">Yo</a>
                 </li>
             </ul>
         </div>
+
         <div class="card-body" id="card-body">
-            <h5 class='card-title'>Active Content</h5><p class='card-text'>This is active!</p><a href='#' class='btn btn-primary'>Go somewhere</a>
+            <div class="active-content" id="active-content">
+                <h5 class='card-title'>Active Content</h5>
+                <p class='card-text'>This is active!</p>
+                <a href='#' class='btn btn-primary'>Go somewhere</a>
+            </div>
+            
+            <div class="edit-content" id="edit-content" style="display: none;">
+                <h5 class='card-title'>Edit Account</h5>
+                <form action="edit.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
+                   Edit Name: <input type="text" name = 'update-name' value=<?php echo $_SESSION['name']?>>
+                <br>    <button type="submit" class='btn btn-primary'>Edit</button>
+                </form>
+            </div>
+            
+            <div class="yo-content" id="yo-content" style="display: none;">
+                <h5 class='yo-title'>Yo Content</h5>
+                <p class='card-text'>This is yo!</p>
+                <a href='#' class='btn btn-primary'>Go somewhere</a>
+            </div>
         </div>
-    </div>
 
 
 
     <script>
-        function toggleContent(content) {
-            
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => link.classList.remove('active'));
-
-            
-            const activeLink = document.querySelector(`.nav-link[onclick="toggleContent('${content}')"]`);
-            activeLink.classList.add('active');
-
-            
-            const text = document.getElementById('card-body');
-            if (content === 'active') {
-                text.innerHTML = "<h5 class='card-title'>Active Content</h5><p class='card-text'>This is active!</p><a href='#' class='btn btn-primary'>Go somewhere</a>";
-            } else if (content === 'link') {
-                text.innerHTML = "<h5 class='card-title'>Link Content</h5><p class='card-text'>This is link!</p><a href='#' class='btn btn-primary'>Go somewhere else</a>";
-            } else if (content === 'yo') {
-                text.innerHTML = "<h5 class='card-title'>Yo Content</h5><p class='card-text'>This is yo!</p><a href='#' class='btn btn-primary'>Go nowhere</a>";
+            function toggleContent(content) {
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => link.classList.remove('active'));
+        
+                const activeLink = document.querySelector(`.nav-link[onclick="toggleContent('${content}')"]`);
+                activeLink.classList.add('active');
+        
+                const sections = ['active-content', 'edit-content', 'yo-content'];
+                sections.forEach(section => {
+                    document.getElementById(section).style.display = 'none';
+                });
+        
+                if (content === 'active') {
+                    document.getElementById('active-content').style.display = 'block';
+                } else if (content === 'link') {
+                    document.getElementById('edit-content').style.display = 'block';
+                } else if (content === 'yo') {
+                    document.getElementById('yo-content').style.display = 'block';
+                }
             }
-        }
-    </script>
+        </script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
