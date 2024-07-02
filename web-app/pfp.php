@@ -57,9 +57,10 @@ if (!isset($_SESSION['id'])) {
         }
 
         #nav {
-            position: absolute;
-            left: 800px;
-        }
+    position: absolute;
+    left: 397px;
+    width: 302px;
+}
 
         .nav-link.active {
             background-color: #007bff;
@@ -195,7 +196,13 @@ if (!isset($_SESSION['id'])) {
     </nav>
 
     <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="pfp.jpg" alt="Card image cap">
+        <?php
+        $profilePic = 'pfp.jpg';
+        if (isset($_SESSION['profile_pic'])) {
+            $profilePic = $_SESSION['profile_pic'];
+        }
+        ?>
+        <img id="current-profile-pic" class="card-img-top" src="<?php echo $profilePic; ?>" alt="Current Profile Picture">
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><?php echo $_SESSION['name'] ?></li>
             <li class="list-group-item"><?php echo $_SESSION['email'] ?></li>
@@ -206,7 +213,14 @@ if (!isset($_SESSION['id'])) {
             <a href="#" class="card-link"><i class="fa-brands fa-square-instagram"></i></a>
             <a href="#" class="card-link"><i class="fa-brands fa-square-x-twitter"></i></a>
         </div>
+<form id="upload-form" enctype="multipart/form-data" onsubmit="return uploadImage(event)">
+    <input type="file" name="fileToUpload" id="fileToUpload" onchange="previewImage(event)">
+    <div id="image-preview-container">
+        <img id="image-preview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto; border-radius: 20%;">
     </div>
+    <button type="submit">Upload Image</button>
+</form>
+
 
     <div class="card text-center" id="nav">
         <div class="card-header">
@@ -232,10 +246,11 @@ if (!isset($_SESSION['id'])) {
             
             <div class="edit-content" id="edit-content" style="display: none;">
                 <h5 class='card-title'>Edit Account</h5>
-                <form action="edit.php" method="post">
-                <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
-                   Edit Name: <input type="text" name = 'update-name' value=<?php echo $_SESSION['name']?>>
-                <br>    <button type="submit" class='btn btn-primary'>Edit</button>
+                <form id="edit-form">
+                    <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
+                    Edit Name: <input type="text" name='update-name' value="<?php echo $_SESSION['name']; ?>">
+                    <br>
+                    <button type="button" class='btn btn-primary' onclick="editName()">Edit</button>
                 </form>
             </div>
             
@@ -271,9 +286,12 @@ if (!isset($_SESSION['id'])) {
             }
         </script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-crossorigin="anonymous"></script>
+
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js"
 integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
 crossorigin="anonymous"></script>
@@ -287,15 +305,71 @@ function logout(){
     <?php session_destroy(); ?>
         alert('Logged out!'); 
         window.location.href = 'register.html';
+}   
+    function editName() {
+                var formData = $("#edit-form").serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "edit.php",
+                    data: formData,
+                    success: function(response) {
+                        if (response.trim() === 'success') {
+                            alert('Content edited, please re-login');
+                            location.reload(); 
+                        } else {
+                            alert(response);
+                        }
+                    },
+                    error: function() {
+                        alert('Error updating record.');
+                    }
+                });
+            }
+
+            function uploadImage(event) {
+    event.preventDefault();  
+
+    var formData = new FormData();
+    var fileInput = document.getElementById('fileToUpload');
+    var file = fileInput.files[0];
+    formData.append('fileToUpload', file);
+
+    $.ajax({
+        url: 'upload.php',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            var jsonResponse = JSON.parse(response);
+            if (jsonResponse.status === 'success') {
+                alert('File uploaded successfully');
+                document.getElementById('current-profile-pic').src = jsonResponse.file_path;
+                document.getElementById('image-preview').style.display = 'none'; // Hide the preview image
+                document.getElementById('image-preview').src = '#'; // Reset the preview image source
+                document.getElementById('fileToUpload').value = ''; // Reset the file input
+            } else {
+                alert('File upload failed: ' + jsonResponse.message);
+            }
+        },
+        error: function() {
+            alert('An error occurred while uploading the file.');
+        }
+    });
 }
 
-window.onload = () => {
-    <?php if (!isset($_SESSION['id'])): ?>
-        window.location.href = 'register.html';
-    <?php endif; ?>
-    };
 
 
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('image-preview');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
 </script>
 
 </body>
