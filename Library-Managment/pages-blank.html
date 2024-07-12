@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Components / Accordion - NiceAdmin Bootstrap Template</title>
+  <title>Tables / Data - NiceAdmin Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,6 +26,9 @@
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
@@ -36,6 +39,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -283,77 +287,37 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-menu-button-wide"></i><span>Categories</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>Alerts</span>
+            <a href="components-accordion.html">
+              <i class="bi bi-circle"></i><span>Research</span>
             </a>
           </li>
           <li>
             <a href="components-accordion.html">
-              <i class="bi bi-circle"></i><span>Accordion</span>
+              <i class="bi bi-circle"></i><span>Engineering</span>
             </a>
           </li>
           <li>
-            <a href="components-badges.html">
-              <i class="bi bi-circle"></i><span>Badges</span>
+            <a href="components-accordion.html">
+              <i class="bi bi-circle"></i><span>Humanitites</span>
             </a>
           </li>
           <li>
-            <a href="components-breadcrumbs.html">
-              <i class="bi bi-circle"></i><span>Breadcrumbs</span>
+            <a href="components-accordion.html">
+              <i class="bi bi-circle"></i><span>Literature</span>
             </a>
           </li>
           <li>
-            <a href="components-buttons.html">
-              <i class="bi bi-circle"></i><span>Buttons</span>
+            <a href="components-accordion.html">
+              <i class="bi bi-circle"></i><span>Law</span>
             </a>
           </li>
           <li>
-            <a href="components-cards.html">
-              <i class="bi bi-circle"></i><span>Cards</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-carousel.html">
-              <i class="bi bi-circle"></i><span>Carousel</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-list-group.html">
-              <i class="bi bi-circle"></i><span>List group</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-modal.html">
-              <i class="bi bi-circle"></i><span>Modal</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-tabs.html">
-              <i class="bi bi-circle"></i><span>Tabs</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-pagination.html">
-              <i class="bi bi-circle"></i><span>Pagination</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-progress.html">
-              <i class="bi bi-circle"></i><span>Progress</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-spinners.html">
-              <i class="bi bi-circle"></i><span>Spinners</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-tooltips.html">
-              <i class="bi bi-circle"></i><span>Tooltips</span>
+            <a href="components-accordion.html">
+              <i class="bi bi-circle"></i><span>Pure Science</span>
             </a>
           </li>
         </ul>
@@ -388,18 +352,12 @@
       </li><!-- End Forms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Student List</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>General Tables</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Data Tables</span>
+        <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+            <a href="tables-data.html" class="active">
+              <i class="bi bi-circle"></i><span>Student Tables</span>
             </a>
           </li>
         </ul>
@@ -496,7 +454,7 @@
       </li><!-- End Error 404 Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="pages-blank.html">
+        <a class="nav-link collapsed" href="pages-blank.html">
           <i class="bi bi-file-earmark"></i>
           <span>Blank</span>
         </a>
@@ -509,36 +467,147 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Blank Page</h1>
+      <h1>Data Tables</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">Blank</li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Data</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-            </div>
+              <h5 class="card-title">Datatables</h5>
+
+              <button class="btn btn-primary" id="newEmployeeBtn" onclick="showNewEmployeeForm()">New Stream</button>
+              <br><br>
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Created At</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody id="employeeTable">
+                  </tbody>
+              </table>
           </div>
+          
+          <!-- Modal -->
+          <div class="modal" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="employeeModalLabel">DB</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          <form id="employeeForm" onsubmit="saveEmployee(event)">
+                              <input type="hidden" id="employeeId" name="id">
+                              <div class="mb-3">
+                                  <label for="name" class="form-label">Name</label>
+                                  <input type="text" class="form-control" id="name" name="name" required>
+                              </div>
+                            </div>                            
+                              <button type="submit" class="btn btn-primary" id="saveEmployeeBtn">Save</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+          <script>
+          $(document).ready(function() {
+              loadEmployees();
+          });
+          
+          function loadEmployees() {
+              $.ajax({
+                  url: 'read_b.php',
+                  type: 'GET',
+                  success: function(response) {
+                      let employees = JSON.parse(response);
+                      renderEmployeeTable(employees);
+                  }
+              });
+          }
+          
+          function renderEmployeeTable(employees) {
+              let rows = '';
+              employees.forEach((employee, index) => {
+                  rows += `
+                      <tr>
+                          <td>${index + 1}</td>
+                          <td>${employee.branch_name}</td>
+                          <td>${employee.created_at}</td>
+                          <td>
+                              <button class='btn btn-primary btn-sm' onclick='editEmployee(${JSON.stringify(employee)})'>Edit</button>
+                              <button class='btn btn-danger btn-sm' onclick='deleteEmployee(${employee.id})'>Delete</button>
+                          </td>
+                      </tr>
+                  `;
+              });
+              $('#employeeTable').html(rows);
+          }
+          
+          function showNewEmployeeForm() {
+              $('#employeeModal').modal('show');
+              $('#employeeForm')[0].reset();
+              $('#employeeId').val('');
+          }
+          
+          function saveEmployee(event) {
+              event.preventDefault();
+              let id = $('#employeeId').val();
+              let branch_name = $('#name').val();
+              let createdAt = new Date().toISOString().split('T')[0]; 
+          
+              let formData = { id, branch_name, created_at: createdAt };
+              let url = id ? 'update_b.php' : 'create_b.php';
+              
+              $.ajax({
+                  url: url,
+                  type: 'POST',
+                  data: formData,
+                  success: function(response) {
+                      alert(response);
+                      $('#employeeModal').modal('hide');
+                      loadEmployees();
+                  }
+              });
+          }
+          
+          function editEmployee(employee) {
+              $('#employeeId').val(employee.id);
+              $('#name').val(employee.branch_name);
+              $('#employeeModal').modal('show');
+          }
+          
+          
+          function deleteEmployee(id) {
+              if (confirm('Are you sure you want to delete this employee?')) {
+                  $.ajax({
+                      url: 'delete_b.php',
+                      type: 'POST',
+                      data: { id },
+                      success: function(response) {
+                          loadEmployees();
+                      }
+                  });
+              }
+          }
+          </script>
+          
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        </div>
-
-        <div class="col-lg-6">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-            </div>
           </div>
 
         </div>
